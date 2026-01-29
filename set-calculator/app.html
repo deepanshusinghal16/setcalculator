@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Calculator - Web UI</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔢 Set Calculator</h1>
+            <p class="subtitle">Perform union, intersection, and difference operations on sets</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="setA">
+                        <span class="label-text">Set A</span>
+                        <span class="element-count" id="setACount">0 elements</span>
+                    </label>
+                    <textarea 
+                        id="setA" 
+                        placeholder="Enter elements (auto-detects comma or newline format)&#10;Examples:&#10;• 1, 2, 3, 4&#10;• 12&#10;13&#10;67&#10;• 1432,&#10;122,&#10;54," 
+                        rows="6"
+                    ></textarea>
+                    <div class="set-preview" id="setAPreview">
+                        <span class="preview-label">Preview:</span>
+                        <span class="preview-content" id="setAPreviewContent">Empty set</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="setB">
+                        <span class="label-text">Set B</span>
+                        <span class="element-count" id="setBCount">0 elements</span>
+                    </label>
+                    <textarea 
+                        id="setB" 
+                        placeholder="Enter elements (auto-detects comma or newline format)&#10;Examples:&#10;• 4, 5, 6, 7&#10;• 2&#10;5&#10;1&#10;• 2, 5, 2, 1" 
+                        rows="6"
+                    ></textarea>
+                    <div class="set-preview" id="setBPreview">
+                        <span class="preview-label">Preview:</span>
+                        <span class="preview-content" id="setBPreviewContent">Empty set</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Options Section -->
+            <div class="options-section">
+                <div class="options-group">
+                    <h3>Output Format</h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="outputFormat" value="comma" checked>
+                            <span>Comma Separated</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="outputFormat" value="newline">
+                            <span>New Line Separated</span>
+                        </label>
+                    </div>
+                    <p class="option-hint">How to display results (input format is auto-detected)</p>
+                </div>
+
+                <div class="options-group">
+                    <h3>Options</h3>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="removeDuplicates" checked>
+                            <span>Remove Duplicates</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="trimWhitespace" checked>
+                            <span>Trim Whitespace</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Operations Section -->
+            <div class="operations-section">
+                <h2>Operations</h2>
+                <div class="operations-grid">
+                    <button class="operation-btn" id="unionBtn" data-operation="union">
+                        <span class="operation-symbol">∪</span>
+                        <span class="operation-name">Union</span>
+                        <span class="operation-desc">A ∪ B</span>
+                    </button>
+                    <button class="operation-btn" id="intersectionBtn" data-operation="intersection">
+                        <span class="operation-symbol">∩</span>
+                        <span class="operation-name">Intersection</span>
+                        <span class="operation-desc">A ∩ B</span>
+                    </button>
+                    <button class="operation-btn" id="differenceABBtn" data-operation="differenceAB">
+                        <span class="operation-symbol">−</span>
+                        <span class="operation-name">Difference</span>
+                        <span class="operation-desc">A − B</span>
+                    </button>
+                    <button class="operation-btn" id="differenceBABtn" data-operation="differenceBA">
+                        <span class="operation-symbol">−</span>
+                        <span class="operation-name">Difference</span>
+                        <span class="operation-desc">B − A</span>
+                    </button>
+                    <button class="operation-btn" id="symmetricDiffBtn" data-operation="symmetricDiff">
+                        <span class="operation-symbol">△</span>
+                        <span class="operation-name">Symmetric Diff</span>
+                        <span class="operation-desc">A △ B</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section">
+                <div class="result-box">
+                    <div class="result-header">
+                        <h3>Result</h3>
+                        <div class="result-header-right">
+                            <span class="result-count" id="resultCount">0 elements</span>
+                            <button id="copyResultBtn" class="copy-btn" title="Copy result" style="display: none;">
+                                <span class="copy-icon">📋</span>
+                                <span class="copy-text">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="result" class="result-content">
+                        <p class="placeholder">Select an operation to see results</p>
+                    </div>
+                </div>
+
+                <div class="sets-display">
+                    <div class="set-display-box">
+                        <h4>Set A</h4>
+                        <div id="setADisplay" class="set-display-content">Not entered</div>
+                    </div>
+                    <div class="set-display-box">
+                        <h4>Set B</h4>
+                        <div id="setBDisplay" class="set-display-content">Not entered</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examples Section -->
+            <div class="examples-section">
+                <h3>Quick Examples</h3>
+                <div class="example-buttons">
+                    <button class="example-btn" data-example="numbers">
+                        <span>🔢</span> Numbers
+                    </button>
+                    <button class="example-btn" data-example="letters">
+                        <span>🔤</span> Letters
+                    </button>
+                    <button class="example-btn" data-example="words">
+                        <span>📝</span> Words
+                    </button>
+                    <button class="example-btn" data-example="clear">
+                        <span>🗑️</span> Clear All
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
