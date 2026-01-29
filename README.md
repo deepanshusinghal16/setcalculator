@@ -16,20 +16,27 @@ A web-based set calculator for performing union, intersection, and difference op
   - Newline-separated values
   - Automatic duplicate removal
   - Whitespace trimming
+  - Auto-detects input format
+
+- **Output Options:**
+  - Comma-separated output
+  - Newline-separated output
+  - Copy to clipboard functionality
 
 - **User-Friendly Interface:**
-  - Clean, modern design
-  - Real-time set details display
-  - Example buttons for quick testing
+  - Clean, simple design
+  - Real-time set previews
+  - Element count display
   - Responsive layout
 
 ## Usage
 
-1. Open `index.html` in a web browser
-2. Enter elements for Set A and Set B
-3. Choose your preferred separator (comma or newline)
+1. Open `app.html` or `index.html` in a web browser
+2. Enter elements for Set A and Set B (supports both comma and newline formats)
+3. Choose your preferred output format (comma or newline)
 4. Select options (remove duplicates, trim whitespace)
 5. Click on any operation button to see results
+6. Use the copy button to copy results to clipboard
 
 ## Examples
 
@@ -46,9 +53,10 @@ A web-based set calculator for performing union, intersection, and difference op
 
 ## Files
 
-- `index.html` - Main HTML structure
-- `styles.css` - Styling and layout
-- `script.js` - Set calculation logic
+- `app.html` / `index.html` - Main HTML structure
+- `app.css` - Styling and layout
+- `app.js` - Set calculation logic
+- `vercel.json` - Deployment configuration
 
 ## Browser Support
 
