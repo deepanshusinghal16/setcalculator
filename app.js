@@ -252,20 +252,15 @@
                 const outputFormatEl = document.querySelector('input[name="outputFormat"]:checked');
                 const outputFormat = outputFormatEl ? outputFormatEl.value : 'comma';
                 
-                let itemsHtml;
+                // Simple text display - no fancy styling
+                let resultText;
                 if (outputFormat === 'newline') {
-                    // Display as newline-separated
-                    itemsHtml = result.map(el => 
-                        `<span class="result-item">${escapeHtml(el)}</span>`
-                    ).join('<br>');
+                    resultText = result.map(escapeHtml).join('\n');
                 } else {
-                    // Display as comma-separated (default)
-                    itemsHtml = result.map(el => 
-                        `<span class="result-item">${escapeHtml(el)}</span>`
-                    ).join(', ');
+                    resultText = result.map(escapeHtml).join(', ');
                 }
                 
-                resultDiv.innerHTML = itemsHtml;
+                resultDiv.innerHTML = '<pre class="result-text">' + resultText + '</pre>';
                 countDiv.textContent = result.length + ' element' + (result.length !== 1 ? 's' : '');
                 
                 // Show copy button
