@@ -199,29 +199,6 @@
                 setBCount.textContent = count + ' element' + (count !== 1 ? 's' : '');
             }
 
-            // Update set displays
-            const setADisplay = document.getElementById('setADisplay');
-            const setBDisplay = document.getElementById('setBDisplay');
-            
-            if (setADisplay) {
-                if (!setA || setA.length === 0) {
-                    setADisplay.textContent = 'Not entered';
-                    setADisplay.className = 'set-display-content empty-set';
-                } else {
-                    setADisplay.textContent = '{ ' + setA.map(escapeHtml).join(', ') + ' }';
-                    setADisplay.className = 'set-display-content';
-                }
-            }
-
-            if (setBDisplay) {
-                if (!setB || setB.length === 0) {
-                    setBDisplay.textContent = 'Not entered';
-                    setBDisplay.className = 'set-display-content empty-set';
-                } else {
-                    setBDisplay.textContent = '{ ' + setB.map(escapeHtml).join(', ') + ' }';
-                    setBDisplay.className = 'set-display-content';
-                }
-            }
         } catch (error) {
             console.error('Error in updatePreviews:', error);
         }
@@ -431,52 +408,6 @@
                 });
             }
 
-            // Example buttons
-            const examples = {
-                numbers: {
-                    setA: '1, 2, 3, 4, 5',
-                    setB: '4, 5, 6, 7, 8'
-                },
-                letters: {
-                    setA: 'a, b, c, d, e',
-                    setB: 'd, e, f, g, h'
-                },
-                words: {
-                    setA: 'apple, banana, cherry, date',
-                    setB: 'cherry, date, elderberry, fig'
-                },
-                clear: {
-                    setA: '',
-                    setB: ''
-                }
-            };
-
-            document.querySelectorAll('.example-btn').forEach(btn => {
-                btn.onclick = function() {
-                    const example = examples[this.dataset.example];
-                    if (example) {
-                        if (setAInput) setAInput.value = example.setA;
-                        if (setBInput) setBInput.value = example.setB;
-                        updatePreviews();
-                        
-                        // Clear result
-                        const resultDiv = document.getElementById('result');
-                        const countDiv = document.getElementById('resultCount');
-                        const copyBtn = document.getElementById('copyResultBtn');
-                        if (resultDiv) {
-                            resultDiv.innerHTML = '<p class="placeholder">Select an operation to see results</p>';
-                        }
-                        if (countDiv) {
-                            countDiv.textContent = '0 elements';
-                        }
-                        if (copyBtn) {
-                            copyBtn.style.display = 'none';
-                            delete copyBtn.dataset.result;
-                            delete copyBtn.dataset.format;
-                        }
-                    }
-                };
-            });
 
             // Initial update
             updatePreviews();
